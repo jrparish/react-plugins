@@ -1,10 +1,24 @@
-import React from 'react'
+import React from 'react';
+import Sidebar from './components/Sidebar';
+import ModulesPage from './components/Page';
+import BillingSection from './modules/billing/components/BillingSection';
+import AdminSection from './modules/admin/components/AdminSection';
 
-import { ExampleComponent } from 'react-pluggable'
-import 'react-pluggable/dist/index.css'
+const App = () => (
+  <div
+    style={{
+      width: '100vw',
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column'
+    }}
+  >
+    <Sidebar />
+    <ModulesPage>
+      <BillingSection />
+      <AdminSection />
+    </ModulesPage>
+  </div>
+);
 
-const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
-}
-
-export default App
+export default App;

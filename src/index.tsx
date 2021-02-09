@@ -1,10 +1,8 @@
-import * as React from 'react'
-import styles from './styles.module.css'
-
-interface Props {
-  text: string
-}
-
-export const ExampleComponent = ({ text }: Props) => {
-  return <div className={styles.test}>Example Component: {text}</div>
-}
+export * from './types';
+export {
+  default as PluginStoreProvider,
+  ProviderContext
+} from './components/PluginStoreProvider';
+export { default as PluginStore } from './utils/store';
+export { default as Plugins } from './components/Plugins';
+export { default as usePlugins } from './hooks/usePlugins';

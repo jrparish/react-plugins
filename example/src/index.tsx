@@ -1,7 +1,16 @@
-import './index.css'
+import './index.css';
 
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
+import React, { Suspense } from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import store from './pluginStore';
+import { PluginStoreProvider } from 'react-plugins';
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(
+  <Suspense fallback='Loading...'>
+    <PluginStoreProvider store={store}>
+      <App />
+    </PluginStoreProvider>
+  </Suspense>,
+  document.getElementById('root')
+);
