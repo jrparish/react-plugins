@@ -1,20 +1,22 @@
-import React, { useMemo } from 'react';
-import PluginStore from '../utils/store';
+import React, { useMemo, ReactNode } from 'react';
+import { PluginStore } from '../utils/store';
 
-type ProviderContextType = {
+interface ProviderContextType {
   store: PluginStore;
-};
+}
 
 export const ProviderContext = React.createContext<ProviderContextType>(
   {} as ProviderContextType
 );
 
-type PluginStoreProviderProps = ProviderContextType;
+interface PluginStoreProviderProps extends ProviderContextType {
+  children?: ReactNode;
+}
 
-const PluginStoreProvider: React.FC<PluginStoreProviderProps> = ({
+export function PluginStoreProvider({
   children,
   store
-}) => {
+}: PluginStoreProviderProps) {
   const contextValues = useMemo(
     () => ({
       store
@@ -27,6 +29,4 @@ const PluginStoreProvider: React.FC<PluginStoreProviderProps> = ({
       {children}
     </ProviderContext.Provider>
   );
-};
-
-export default PluginStoreProvider;
+}

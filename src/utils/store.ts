@@ -16,7 +16,7 @@ export class PluginStore {
 
   registerPlugin(
     section: string,
-    component: ComponentType | JSX.Element,
+    component: ComponentType,
     name: string,
     priority = 0
   ): void {
@@ -50,7 +50,7 @@ export class PluginStore {
     this.listeners.forEach((listener) => listener(this.sections));
   }
 
-  getPluginsForSection(section: string): Array<ComponentType | JSX.Element> {
+  getPluginsForSection(section: string): Array<ComponentType> {
     const pluginStore = this.sections[section];
 
     if (!pluginStore || pluginStore.length < 1) {
@@ -62,5 +62,3 @@ export class PluginStore {
       .map((a) => a.component);
   }
 }
-
-export default PluginStore;

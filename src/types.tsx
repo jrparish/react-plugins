@@ -1,9 +1,9 @@
 export type PluginType = {
-  component: React.ComponentType | JSX.Element
-  priority: number
-  name?: string
-}
+  component: React.ComponentType;
+  priority: number;
+  name?: string;
+};
 
 export type PluginStoreType = {
-  [key: string]: PluginType[]
-}
+  [key: string]: PluginType[];
+};

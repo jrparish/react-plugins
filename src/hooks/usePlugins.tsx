@@ -1,34 +1,34 @@
-import React, { useContext, useEffect, useMemo, useReducer } from 'react';
+import { useContext, useEffect, useCallback, useState } from 'react';
 import { ProviderContext } from '../components/PluginStoreProvider';
 
-const usePlugins = (section: string): Array<JSX.Element> => {
+export function usePlugins(section: string) {
   const { store } = useContext(ProviderContext);
-  const [, forceRender] = useReducer((s) => s + 1, 0);
+
+  const getPlugins = useCallback(
+    () => store.getPluginsForSection(section),
+    [store]
+  );
+
+  const [plugins, setPlugins] = useState(getPlugins());
 
   useEffect(() => {
     const unsub = store.subscribe(() => {
-      forceRender();
+      setPlugins(getPlugins());
     });
+    return () => unsub();
+  }, [store, getPlugins]);
 
-    return (): void => {
-      unsub();
-    };
-  }, [store]);
-
-  const plugins = store.getPluginsForSection(section);
-
-  return useMemo(
-    () =>
-      plugins.map((component) => {
-        if (React.isValidElement(component)) {
-          return (component as unknown) as JSX.Element;
-        } else {
-          const Component = component as React.ComponentType;
-          return <Component />;
-        }
-      }),
-    [plugins]
-  );
-};
-
-export default usePlugins;
+  return plugins;
+  // return useMemo(
+  //   () =>
+  //     plugins.map((component) => {
+  //       if (React.isValidElement(component)) {
+  //         return component as unknown as JSX.Element;
+  //       } else {
+  //         const Component = component as React.ComponentType<P | {}>;
+  //         return <Component {...props} />;
+  //       }
+  //     }),
+  //   [plugins]
+  // );
+}

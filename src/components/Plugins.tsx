@@ -1,20 +1,21 @@
 import React from 'react';
-import usePlugins from '../hooks/usePlugins';
+import { usePlugins } from '../hooks/usePlugins';
 
-type PluginsProps = {
+interface PluginsProps {
   section: string;
-};
+}
 
-const Plugins = ({ section }: PluginsProps): JSX.Element => {
+export function Plugins<T extends {}>({
+  section,
+  ...rest
+}: PluginsProps & T): JSX.Element {
   const plugins = usePlugins(section);
 
   return (
     <React.Fragment>
-      {plugins.map((component, index) => (
-        <React.Fragment key={`${section}-${index}`}>{component}</React.Fragment>
+      {plugins.map((Component, index) => (
+        <Component key={`${section}-${index}`} {...rest} />
       ))}
     </React.Fragment>
   );
-};
-
-export default Plugins;
+}
