@@ -1,4 +1,3 @@
-import React from 'react';
 import Sidebar from './components/Sidebar';
 import ModulesPage from './components/Page';
 import BillingSection from './modules/billing/components/BillingSection';

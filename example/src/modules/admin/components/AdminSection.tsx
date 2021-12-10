@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import AdminWidget from './AdminWidget';
 import PluginStore from '../../../pluginStore';
 
@@ -8,6 +8,7 @@ const AdminSection = () => {
   useEffect(() => {
     PluginStore.registerPlugin(
       'sidebar',
+      // @ts-expect-error
       <AdminWidget badgeCount={count} />,
       'admin-widget',
       -100
