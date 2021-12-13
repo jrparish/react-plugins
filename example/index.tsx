@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import store from './pluginStore';
-import { PluginStoreProvider } from 'react-plugins';
+import { PluginStoreProvider } from '../src/index';
 
 ReactDOM.render(
   <Suspense fallback='Loading...'>

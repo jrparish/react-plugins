@@ -1,4 +1,4 @@
-import { PluginStore } from 'react-plugins';
+import { PluginStore } from '../src/index';
 
 const store = new PluginStore();
 

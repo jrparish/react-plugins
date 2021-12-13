@@ -1,4 +1,4 @@
-import { Plugins } from 'react-plugins';
+import { Plugins } from '../../src/index';
 
 const Sidebar = () => (
   <div
