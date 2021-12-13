@@ -6,13 +6,9 @@ const AdminSection = () => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    PluginStore.registerPlugin(
-      'sidebar',
-      // @ts-expect-error
-      <AdminWidget badgeCount={count} />,
-      'admin-widget',
-      -100
-    );
+    PluginStore.registerPlugin('sidebar', AdminWidget, 'admin-widget', -100, {
+      badgeCount: count
+    });
   });
 
   return (

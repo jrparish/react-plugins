@@ -14,11 +14,12 @@ export class PluginStore {
     };
   }
 
-  registerPlugin(
+  registerPlugin<P>(
     section: string,
-    component: ComponentType,
+    component: ComponentType<P>,
     name: string,
-    priority = 0
+    priority = 0,
+    props?: P
   ): void {
     const pluginStore = this.sections[section] || [];
 
@@ -29,12 +30,16 @@ export class PluginStore {
           ? {
               component,
               priority,
-              name
+              name,
+              props
             }
           : current
       );
     } else {
-      this.sections[section] = [...pluginStore, { component, priority, name }];
+      this.sections[section] = [
+        ...pluginStore,
+        { component, priority, name, props }
+      ];
     }
 
     this.listeners.forEach((listener) => listener(this.sections));
@@ -50,15 +55,13 @@ export class PluginStore {
     this.listeners.forEach((listener) => listener(this.sections));
   }
 
-  getPluginsForSection(section: string): Array<ComponentType> {
+  getPluginsForSection(section: string) {
     const pluginStore = this.sections[section];
 
     if (!pluginStore || pluginStore.length < 1) {
       return [];
     }
 
-    return pluginStore
-      .sort((a, b) => a.priority - b.priority)
-      .map((a) => a.component);
+    return pluginStore.sort((a, b) => a.priority - b.priority).map((a) => a);
   }
 }

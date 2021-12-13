@@ -1,9 +1,10 @@
-export type PluginType = {
-  component: React.ComponentType;
+import { ComponentType } from 'react';
+
+export interface PluginType<P = any> {
+  component: ComponentType<P>;
   priority: number;
   name?: string;
-};
+  props?: P;
+}
 
-export type PluginStoreType = {
-  [key: string]: PluginType[];
-};
+export type PluginStoreType = Record<string, PluginType[]>;

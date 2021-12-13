@@ -13,8 +13,8 @@ export function Plugins<T extends {}>({
 
   return (
     <React.Fragment>
-      {plugins.map((Component, index) => (
-        <Component key={`${section}-${index}`} {...rest} />
+      {plugins.map(({ component: Component, props }, index) => (
+        <Component key={`${section}-${index}`} {...props} {...rest} />
       ))}
     </React.Fragment>
   );
